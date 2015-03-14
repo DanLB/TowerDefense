@@ -7,7 +7,7 @@
 RenderingThread::RenderingThread(dlb::UserInterface& window, ObjectManager& objManager) :
     window(window),
     objManager(objManager),
-    thread(&RenderingThread::renderThread, this), //Instantiate thread to call renderingThread() upon launch
+    thread(&RenderingThread::renderThread, this), //Instantiate thread to call renderThread() upon launch
     graphicsManager()
 {
     thread.launch();
