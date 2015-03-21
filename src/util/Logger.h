@@ -33,7 +33,7 @@ namespace dlb {
         Logger(std::string logFileName, Log::Level fileLevel, Log::Level consoleLevel);
         ~Logger();
 
-        bool start() throw (DlbException);
+        void start() throw (DlbException);
 
         void log(Log log);
     };

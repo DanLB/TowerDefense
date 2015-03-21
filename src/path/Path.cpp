@@ -1,38 +1,34 @@
+
+#include <chrono>
 #include "Path.h"
 #include "../util/dlb.h"
-#include <random>
-#include <chrono>
+#include "../Game.h"
 
 Path::Path(sf::Vector2f position) :
-    BaseObject(Type::PATH, Team::NONE, position, 0)
+    BaseObject(Type::PATH, Team::NONE, position, 0),
+    size(0)
 {
     path = std::vector<std::shared_ptr<Path>>();
+
+    long long seed = std::chrono::system_clock::now().time_since_epoch().count();
+    generator = std::default_random_engine(seed);
 }
 
 void Path::addPath(std::shared_ptr<Path> path)
 {
     this->path.push_back(path);
+    size = this->path.size();
+    if (size > 0) {
+        distribution = std::uniform_int_distribution<unsigned int>(0, size - 1);
+    }
 }
 
 std::shared_ptr<Path> Path::getNext()
 {
-    int size = path.size();
-
-    if (size == 0)
+    if (size == 0) {
         return nullptr;
-
-    if (size == 1)
-        return path.at(0);
-    else
-    {
-        size--;
-        // construct a trivial random generator engine from a time-based seed:
-        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generator(seed);
-        std::uniform_int_distribution<int> distribution(0,size);
-        int r = distribution(generator);
-        return path.at(r);
     }
+    return path.at(distribution(generator));
 }
 
 void Path::draw(std::shared_ptr<sf::Sprite> sprite, sf::RenderWindow& window)
@@ -42,12 +38,24 @@ void Path::draw(std::shared_ptr<sf::Sprite> sprite, sf::RenderWindow& window)
     window.draw(*sprite);
 
     //Use for_each to iterate through all paths and draw them.
-    //Uses lamda function to recursively call the elements' draw function.
+    //Uses lambda function to recursively call the elements' draw function.
     std::for_each(path.begin(), path.end(), [sprite, &window](std::shared_ptr<Path> pathDraw){pathDraw->draw(sprite, window);});
 }
 
+void Path::setEnd() {
+
+    Game::getLogger().log(dlb::Log(dlb::Log::Level::INFO, toString()));
+    win = true;
+}
+
+bool Path::end() {
+    return win;
+}
+
 int Path::update(sf::Time elapsed)
-{}
+{
+    return 0;
+}
 
 std::string Path::toString()
 {

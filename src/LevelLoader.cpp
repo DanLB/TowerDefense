@@ -1,16 +1,16 @@
 #include "gameobjects/ObjectManager.h"
 #include "LevelLoader.h"
 #include <fstream>
-#include <string>
 #include "util/dlb.h"
 #include "Game.h"
-#include "util/Log.h"
 
 LevelLoader::LevelLoader(ObjectManager& objManager) : objManager(objManager)
 {}
 
 bool LevelLoader::loadLevel(int lvl)
 {
+
+    Game::getLogger().log(dlb::Log(dlb::Log::Level::INFO, "Loading level " + dlb::toString(lvl)));
     bool status = true;
     int min = 1;
     int max = 0;
@@ -82,10 +82,13 @@ bool LevelLoader::loadLevel(int lvl)
         return false;
     }
 
+    std::map<int, std::shared_ptr<Path>>:: iterator end = pathMap.end();
+    end--;
+    end->second.get()->setEnd();
+
     std::shared_ptr<Path> first = firstItr->second;
 
     objManager.addStartingPath(first);
-
 
     //Create the path
     while (file.good())

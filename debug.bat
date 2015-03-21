@@ -1,13 +1,13 @@
 @ECHO OFF
 
-IF NOT EXIST C:\micwis\TowerDefense\trunk\bin\Debug (
-	MKDIR C:\micwis\TowerDefense\trunk\bin\Debug
+IF NOT EXIST E:\Programming\TowerDefense\bin (
+	MKDIR E:\Programming\TowerDefense\bin
 	ECHO "Debug dir Created"
 ) ELSE (
 	ECHO "Debug already exists"
 )
 
-CD C:\micwis\TowerDefense\trunk\bin\Debug
+CD E:\Programming\TowerDefense\bin
 
 IF EXIST graphics (
 	rmdir /s /q graphics
@@ -23,14 +23,20 @@ IF EXIST "path" (
 	ECHO "Path already Deleted"
 )
 
-CD C:\micwis\TowerDefense\trunk
-XCOPY graphics bin\Debug\graphics /s /i
+CD E:\Programming\TowerDefense
+XCOPY graphics bin\graphics /s /i
 ECHO "Graphics Copied to Debug"
 
-XCOPY "path" "bin\Debug\path" /s /i
+XCOPY path bin\path /s /i
 ECHO "Path Copied to Debug"
 
-CD "C:\micwis\TowerDefense\trunk\SFML-2.0\bin"
-COPY sfml-graphics-d-2.dll "..\..\bin\Debug\" /b
-COPY sfml-system-d-2.dll "..\..\bin\Debug\" /b
-COPY sfml-window-d-2.dll "..\..\bin\Debug\" /b
+CD "E:\Programming\TowerDefense\SFML\bin"
+COPY sfml-graphics-d-2.dll "../..\bin\" /b
+COPY sfml-system-d-2.dll "../..\bin\" /b
+COPY sfml-window-d-2.dll "../..\bin\" /b
+
+ECHO "sfml dlls copied to Debug
+
+CD "E:\Programming\TowerDefense\resources"
+COPY libgcc_s_dw2-1.dll "../bin/" /b
+COPY "libstdc++-6.dll" "../bin/" /b

@@ -1,5 +1,4 @@
 #include "MovingObject.h"
-#include <cmath>
 #include "../Game.h"
 
 #ifndef PI
@@ -30,6 +29,7 @@ int MovingObject::update(sf::Time elapsed)
         if (ooB != 0)
             return ooB;
     }
+    return 0;
 }
 
 void MovingObject::moveSelf(sf::Time elapsed)

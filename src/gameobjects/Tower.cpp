@@ -1,9 +1,7 @@
 #include <cmath>
 #include "Tower.h"
 #include "../Game.h"
-#include <limits>
 #include "../util/dlb.h"
-#include "BaseObject.h"
 #include "Shot.h"
 
 #ifndef PI
@@ -69,4 +67,6 @@ int Tower::update(sf::Time elapsed)
             canShoot = true;
         }
     }
+
+    return 0;
 }

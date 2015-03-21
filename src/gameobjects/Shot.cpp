@@ -10,16 +10,14 @@ Shot::Shot(Type type, sf::Vector2f position, double rotation, double speed, int 
 {}
 
 int Shot::updateLogic(sf::Time elapsed)
-{}
+{
+    return 0;
+}
 
 int Shot::calculateCollisions()
 {
     ObjectManager& objManager = Game::getObjectManager();
     std::map<int, std::shared_ptr<BasicEnemy>>& enemies = objManager.getEnemies();
-
-    std::shared_ptr<BasicEnemy> closestEnemy = nullptr;
-    double closestDistance = std::numeric_limits<double>::max();
-    double currentDistance;
 
     for (std::map<int, std::shared_ptr<BasicEnemy>>::iterator itr = enemies.begin(); itr != enemies.end(); ++itr)
     {

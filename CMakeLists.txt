@@ -62,6 +62,10 @@ include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 endif()
 
+if (WIN32)
+    add_custom_command(TARGET TowerDefense POST_BUILD COMMAND debug WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+
 set_target_properties(TowerDefense PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 # Install target
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION /bin)

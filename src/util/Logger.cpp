@@ -15,16 +15,6 @@ namespace dlb
         logPointer = &logQueue1;
     }
 
-    bool Logger::start() throw (DlbException)
-    {
-        if (!file.is_open())
-        {
-            throw DlbException(logFileName + " didn't open");
-        }
-        logPointer->push(Log(Log::INFO, "Starting Logger thread"));
-        outThread.launch();
-    }
-
     Logger::~Logger()
     {
         if (file.is_open())
@@ -33,6 +23,16 @@ namespace dlb
             outThread.terminate();
             file.close();
         }
+    }
+
+    void Logger::start() throw (DlbException)
+    {
+        if (!file.is_open())
+        {
+            throw DlbException(logFileName + " didn't open");
+        }
+        logPointer->push(Log(Log::INFO, "Starting Logger thread"));
+        outThread.launch();
     }
 
     void Logger::write()
@@ -65,6 +65,8 @@ namespace dlb
                 if (log.getLevel() <= consoleLevel)
                     std::cout << log.toString() << "\n";
             }
+
+            sf::sleep(sf::milliseconds(100));
         }
     }
 

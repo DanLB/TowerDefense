@@ -39,6 +39,11 @@ public:
     virtual ~BaseObject() = default;
 
     //Called in Game::gameLoop()
+    /**
+    * 0 - do nothing
+    * 1 - delete me
+    * 2 - You lose and delete me
+    */
     virtual int update(sf::Time elapsed) = 0;
 
     //Return the id of the object

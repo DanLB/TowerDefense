@@ -2,8 +2,6 @@
 #include "gameobjects/Tower.h"
 #include "gameobjects/BasicEnemy.h"
 #include "Game.h"
-#include "util/Log.h"
-#include "gui/UserInterface.h"
 
 /**
  * Constructor. Initializes variables and calls init()
@@ -143,4 +141,4 @@ dlb::UserInterface& Game::getWindow()
 
 /******** STATIC VARIABLE INITIALIZATION ********/
 ObjectManager Game::objManager;
-dlb::Logger Game::logger("log.txt", dlb::Log::Level::TRACE, dlb::Log::Level::INFO);
+dlb::Logger Game::logger("log.txt", dlb::Log::Level::TRACE, dlb::Log::Level::TRACE);

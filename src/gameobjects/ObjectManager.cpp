@@ -1,6 +1,6 @@
 #include "ObjectManager.h"
 #include "../Game.h"
-#include "../util/Log.h"
+#include "../util/dlb.h"
 
 /**
  * Constructor. No variables are instantiated in this class
@@ -110,10 +110,18 @@ void ObjectManager::updateAll(sf::Time elapsed)
         int returnCode = itr->second->update(elapsed);
 
         switch (returnCode) {
-        case 0:
-            break;
-        case 1:
-            toDelete.push_back(itr->second->getId());
+            case 0:
+                break;
+            case 1:
+                toDelete.push_back(itr->second->getId());
+                break;
+            case 2:
+                toDelete.push_back(itr->second->getId());
+                Game::getLogger().log(dlb::Log(dlb::Log::Level::INFO, "You Lose"));
+                break;
+            default:
+                Game::getLogger().log(dlb::Log(dlb::Log::WARN, "Invalid update return " + dlb::toString(returnCode) + " from " + itr->second->toString()));
+                break;
         }
     }
 

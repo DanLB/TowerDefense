@@ -1,8 +1,5 @@
 #include "BasicEnemy.h"
-#include <cmath>
-#include <exception>
 #include "../Game.h"
-#include "../util/Log.h"
 #include "../util/dlb.h"
 
 #ifndef PI
@@ -23,15 +20,16 @@ int BasicEnemy::updateLogic(sf::Time elapsed)
         return 1;
     }
 
-    //If we're at the end
-    if (path == nullptr)
-        return 1;
-
     //If we're at the next path
     if (std::abs(position.x - path->getPosition().x) < 1 && std::abs(position.y - path->getPosition().y) < 1)
     {
+        if (path->end()) {
+            return 2;
+        }
+
         path = path->getNext();
 
+        //we're at the end
         if (path == nullptr)
             return 1;
 
@@ -39,6 +37,7 @@ int BasicEnemy::updateLogic(sf::Time elapsed)
 
         rotation = angle * (180.0 / PI);
     }
+    return 0;
 }
 
 //No collisions checked here
