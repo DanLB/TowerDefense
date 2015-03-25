@@ -1,8 +1,7 @@
 #ifndef DLB_WINDOW_H
 #define DLB_WINDOW_H
 
-#include <SFML/Graphics.hpp>
-#include "components/GuiObject.h"
+class GuiObject;
 
 namespace dlb
 {
@@ -11,7 +10,7 @@ namespace dlb
     private:
         sf::RenderWindow window;
 
-        std::vector<GuiObject*> guiObjects;
+        std::vector<std::shared_ptr<GuiObject>> guiObjects;
     protected:
 
     public:
@@ -19,6 +18,8 @@ namespace dlb
         void click(float x, float y);
 
         void drawAll();
+
+        void add(std::shared_ptr<GuiObject> object);
     };
 }
 #endif // WINDOW_H

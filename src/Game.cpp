@@ -2,6 +2,7 @@
 #include "gameobjects/Tower.h"
 #include "gameobjects/BasicEnemy.h"
 #include "Game.h"
+#include "gui/components/Button.h"
 
 /**
  * Constructor. Initializes variables and calls init()
@@ -47,6 +48,9 @@ void Game::init()
     //Enemies
     std::shared_ptr<BasicEnemy> enemy(new BasicEnemy(objManager.getPath(), 30, BASIC_ENEMY, 10));
     objManager.addEnemy(enemy);
+
+    std::shared_ptr<Button> button(new Button(sf::Vector2f(550, 240), "Test", sf::Color::Yellow, sf::Color::Black));
+    window.add(button);
 }
 
 /**

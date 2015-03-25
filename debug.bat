@@ -40,3 +40,4 @@ ECHO "sfml dlls copied to Debug
 CD "E:\Programming\TowerDefense\resources"
 COPY libgcc_s_dw2-1.dll "../bin/" /b
 COPY "libstdc++-6.dll" "../bin/" /b
+COPY "Arnprior.ttf" "../bin/" /b

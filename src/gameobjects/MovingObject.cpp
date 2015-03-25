@@ -36,8 +36,8 @@ void MovingObject::moveSelf(sf::Time elapsed)
 {
     //Heading, speed, position
     double headingInRad = rotation * PI / 180;
-    float y = sin(headingInRad) * speed;
-    float x = cos(headingInRad) * speed;
+    float y = static_cast<float>(sin(headingInRad) * speed);
+    float x = static_cast<float>(cos(headingInRad) * speed);
 
     position.x += x * elapsed.asSeconds();
     position.y += y * elapsed.asSeconds();
